@@ -60,44 +60,52 @@ public class UserChoice implements LuckyItemQuestion {
 
         do {
             System.out.println(".･ ｡ ⊹ + ஐ 행 운 을 불 러 오 는 중 ஐ + ⊹ ｡ ･." + "\n");
-            try {
-                TimeUnit.SECONDS.sleep(3);
-                LuckyItem item = new LuckyItem();
-                LuckyListPrint(item, "아 이 템 은 ?", "LuckyThing");
-                LuckyListPrint(item, "컬 러 는 ?", "LuckyColor");
-                LuckyListPrint(item, "숫 자 는 ?", "LuckyNumber");
-
-                System.out.println(" .･ ｡ ⊹ + ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ + ⊹ ｡ ･.");
-                System.out.println(" .･ ｡ ⊹ + ஐ 추 천 템 을 활 용 하 시 고 ஐ + ⊹ ｡ ･.");
-                System.out.println(".･ ｡ ⊹ + ஐ ஐ ஐ ஐ 오 늘 하 루 ஐ ஐ ஐ ஐ + ⊹ ｡ ･.");
-                System.out.println(".･ ｡ ⊹ + ஐ ஐ 행 운 이 가 득 하 기 를 ஐ ஐ + ⊹ ｡ ･.");
-                System.out.println(" .･ ｡ ⊹ + ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ + ⊹ ｡ ･." + "\n");
-
-                System.out.println(" .･ ｡ ⊹ + ஐ 다 시 하 시 겠 습 니 까 ? ஐ + ⊹ ｡ ･.");
-                System.out.println("  .･ ｡ ⊹ + ஐ ஐ ஐ ஐ y / n ஐ ஐ ஐ ஐ + ⊹ ｡ ･."+ "\n");
-
-                last  = sc.next();
-                switch (last){
-                    case "y" -> {
-                        TodayWeather();
-                        repeat = true;
-                    }
-                    case "n" -> {
-                        System.out.println(".･ ｡ ⊹ + ஐ ஐ 행 운 을 빕 니 다 ஐ ஐ *+ ⊹ ｡ ･.");
-                        System.out.println(".･ ｡ ⊹ + ஐ ஐ T H E - E N D ஐ ஐ *+ ⊹ ｡ ･.");
-                        System.exit(0);
-                        repeat = false;
-                    }
-                    default -> {
-                        ErrorMsg();
-                        repeat = true;
-                    }
+            Thread sleepThread = new Thread(() -> {
+                try{
+                    Thread.sleep(3000);
                 }
-
+                catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            sleepThread.start();
+            try {
+                sleepThread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
+            LuckyItem item = new LuckyItem();
+            LuckyListPrint(item, "아 이 템 은 ?", "LuckyThing");
+            LuckyListPrint(item, "컬 러 는 ?", "LuckyColor");
+            LuckyListPrint(item, "숫 자 는 ?", "LuckyNumber");
+
+            System.out.println(" .･ ｡ ⊹ + ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ + ⊹ ｡ ･.");
+            System.out.println(" .･ ｡ ⊹ + ஐ 추 천 템 을 활 용 하 시 고 ஐ + ⊹ ｡ ･.");
+            System.out.println(".･ ｡ ⊹ + ஐ ஐ ஐ ஐ 오 늘 하 루 ஐ ஐ ஐ ஐ + ⊹ ｡ ･.");
+            System.out.println(".･ ｡ ⊹ + ஐ ஐ 행 운 이 가 득 하 기 를 ஐ ஐ + ⊹ ｡ ･.");
+            System.out.println(" .･ ｡ ⊹ + ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ ஐ + ⊹ ｡ ･." + "\n");
+
+            System.out.println(" .･ ｡ ⊹ + ஐ 다 시 하 시 겠 습 니 까 ? ஐ + ⊹ ｡ ･.");
+            System.out.println("  .･ ｡ ⊹ + ஐ ஐ ஐ ஐ y / n ஐ ஐ ஐ ஐ + ⊹ ｡ ･."+ "\n");
+
+            last  = sc.next();
+            switch (last){
+                case "y" -> {
+                    TodayWeather();
+                    repeat = true;
+                }
+                case "n" -> {
+                    System.out.println(".･ ｡ ⊹ + ஐ ஐ 행 운 을 빕 니 다 ஐ ஐ *+ ⊹ ｡ ･.");
+                    System.out.println(".･ ｡ ⊹ + ஐ ஐ T H E - E N D ஐ ஐ *+ ⊹ ｡ ･.");
+                    System.exit(0);
+                    repeat = false;
+                }
+                default -> {
+                    ErrorMsg();
+                    repeat = true;
+                }
+            }
         }
         while(repeat);
     }
