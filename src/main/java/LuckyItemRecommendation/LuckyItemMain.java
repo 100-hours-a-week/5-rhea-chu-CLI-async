@@ -11,9 +11,13 @@ public class LuckyItemMain {
         Scanner sc = new Scanner(System.in);
         UserChoice choice = new UserChoice();
         BackgroundMusic music = new BackgroundMusic();
+        EffectMusic effectMusic = new EffectMusic();
+        Thread musicThread = new Thread(effectMusic);
 
         try {
             music.MusicPlay();
+            effectMusic.StopEffectSound();
+
             Clip clip = AudioSystem.getClip();
             Thread.sleep(clip.getMicrosecondLength() / 1000); // 음악 재생 시간 동안 대기
             Intro();
@@ -28,8 +32,8 @@ public class LuckyItemMain {
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.fillInStackTrace();
         } finally {
             sc.close();
         }

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class UserChoice implements LuckyItemQuestion {
     Scanner sc = new Scanner(System.in);
+    EffectMusic effectMusic = new EffectMusic();
 
     @Override
     public void TodayWeather() {
@@ -117,6 +118,10 @@ public class UserChoice implements LuckyItemQuestion {
             MainMsg(message);
             PrintOptions(options);
             ChoiceMsg();
+
+            Thread effectMusicTread = new Thread(effectMusic);
+            effectMusicTread.start();
+
             try{
                 choice = sc.nextInt();
                 isValid = (choice >= 1 && choice <= maxChoice);
@@ -128,6 +133,9 @@ public class UserChoice implements LuckyItemQuestion {
                 ErrorMsg();
                 sc.nextLine(); // 커치안에서 무한 반복 탈출 위해서 재 ���기화
                 isValid = false;
+            }
+            finally {
+                effectMusic.StopEffectSound();
             }
         }
         while(!isValid);// 유효하지 않은 경우 반복
