@@ -12,14 +12,14 @@ public class LuckyItemMain {
         UserChoice choice = new UserChoice();
         BackgroundMusic music = new BackgroundMusic();
         EffectMusic effectMusic = new EffectMusic();
-        Thread musicThread = new Thread(effectMusic);
+        Thread musicThread = new Thread(music);
 
         try {
-            music.MusicPlay();
+            musicThread.start();
             effectMusic.StopEffectSound();
 
             Clip clip = AudioSystem.getClip();
-            Thread.sleep(clip.getMicrosecondLength() / 1000); // 음악 재생 시간 동안 대기
+            Thread.sleep(clip.getMicrosecondLength() / 3000); // 음악 재생 시간 동안 대기
             Intro();
 
             System.out.println(".･ ｡ ⊹ + ஐ ஐ 시 작 하 시 겠 습 니 까? (y / n) ஐ ஐ *+ ⊹ ｡ ･.");

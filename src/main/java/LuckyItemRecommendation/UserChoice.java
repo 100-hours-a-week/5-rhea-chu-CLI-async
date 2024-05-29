@@ -23,10 +23,10 @@ public class UserChoice implements LuckyItemQuestion {
 
     @Override
     public void TodayFeelings() {
-            String[] Feelings = {"1. 상 쾌", "2. 우 울", "3. 분 노", "4. 유 쾌",
+            String[] feelings = {"1. 상 쾌", "2. 우 울", "3. 분 노", "4. 유 쾌",
                     "5. 평 범", "6. 짜 증", "7. 따 분", "8. 짜 릿"};
-            String FeelingsMsg = "오 늘 의 기 분 은 ?";
-            UserInputHandler(Feelings,FeelingsMsg, 8 );
+            String feelingsMsg = "오 늘 의 기 분 은 ?";
+            UserInputHandler(feelings,feelingsMsg, 8 );
 
             AloneOrNot();
     }
@@ -131,7 +131,7 @@ public class UserChoice implements LuckyItemQuestion {
             }
             catch (InputMismatchException e){
                 ErrorMsg();
-                sc.nextLine(); // 커치안에서 무한 반복 탈출 위해서 재 ���기화
+                sc.nextLine(); //무한 반복 탈출 위해서 재 초기화
                 isValid = false;
             }
             finally {
